@@ -1,3 +1,5 @@
 # Calculator
 
 ## TODO
+
+- downgrade react
