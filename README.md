@@ -2,4 +2,5 @@
 
 ## TODO
 
-- downgrade react
+- downgrade react ✅
+- add favicon ✅
