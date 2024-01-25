@@ -1,30 +1,56 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { numberKeys, operationKeys } from "./keyData";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPlus,
+  faMinus,
+  faMultiply,
+  faDivide,
+  faEquals,
+  faCircle,
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  fa0,
+  fa1,
+  fa2,
+  fa3,
+  fa4,
+  fa5,
+  fa6,
+  fa7,
+  fa8,
+  fa9,
+} from "@fortawesome/free-solid-svg-icons";
 import "./styles/App.scss";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
+    <div>
+      <div id="display"></div>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
+        <a id="add">
+          <FontAwesomeIcon icon={faPlus} />
         </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+
+        <FontAwesomeIcon id="subtract" icon={faMinus} />
+        <FontAwesomeIcon id="divide" icon={faDivide} />
+        <FontAwesomeIcon id="multiply" icon={faMultiply} />
+        <FontAwesomeIcon id="equals" icon={faEquals} />
+        <FontAwesomeIcon id="decimal" icon={faCircle} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+      <div>
+        <FontAwesomeIcon icon={fa0} />
+        <FontAwesomeIcon icon={fa1} />
+        <FontAwesomeIcon icon={fa2} />
+        <FontAwesomeIcon icon={fa3} />
+        <FontAwesomeIcon icon={fa4} />
+        <FontAwesomeIcon icon={fa5} />
+        <FontAwesomeIcon icon={fa6} />
+        <FontAwesomeIcon icon={fa7} />
+        <FontAwesomeIcon icon={fa8} />
+        <FontAwesomeIcon icon={fa9} />
       </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
+    </div>
   );
 }
 
