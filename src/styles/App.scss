@@ -1,7 +1,6 @@
 #root {
   width: 30rem;
   max-width: 90%;
-  // height: 600px;
   max-height: 90%;
   background-color: rgb(183, 120, 43);
   font-size: 3rem;
@@ -22,37 +21,41 @@
   }
 }
 
+.key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0.3rem 0.3rem 0.3rem #363639);
+  border: 1px solid rgba(183, 120, 43, 0.5);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.9;
+    filter: drop-shadow(0 0 0);
+  }
+}
+
 #operation-keys {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   height: 5rem;
-  padding: 2%;
+  padding: 3%;
   .key {
     background-color: lightgreen;
     max-width: 20%;
     flex-grow: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border-radius: 0.5rem;
   }
 }
 
 #number-keys {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  gap: 1.5rem;
   grid-auto-rows: minmax(5rem, auto);
-  padding: 2%;
+  padding: 3%;
   .key {
     background-color: lightblue;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.5rem;
   }
   /* set the double width of the zero key*/
   #zero {
@@ -65,16 +68,11 @@
   flex-direction: row;
   justify-content: space-between;
   height: 5rem;
-  padding: 2%;
+  padding: 3%;
   .key {
     background-color: lightcoral;
     min-width: 25%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     flex-grow: 1;
     max-width: 47%;
-    cursor: pointer;
-    border-radius: 0.5rem;
   }
 }
