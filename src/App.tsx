@@ -10,7 +10,7 @@ function App() {
   const [currentCalc, setCurrentCalc] = useState<string[]>([]);
 
   useEffect(() => {
-    console.log("new calc", currentCalc);
+    console.log("current calc", currentCalc, currentCalc.length);
   });
 
   function clearValue() {
@@ -18,10 +18,15 @@ function App() {
     setCurrentCalc([]);
   }
 
+  function isOperator(value: string) {
+    return ["+", "-", "/", "*"].includes(value);
+  }
+
   function addToCalc(keyValue: string, keyType: KeyType) {
     console.log("key clicked", keyValue, keyType);
 
-    if (currentCalc.length === 0 && keyType === "number") {
+    // If empty currentCalc array - add the keypress if it's a number or a minus, otherwise ignore
+    if (currentCalc.length === 0 && (keyType === "number" || keyValue === "-")) {
       setCurrentCalc([...currentCalc, keyValue]);
       setDisplayValue(keyValue);
       return;
@@ -30,41 +35,72 @@ function App() {
       return;
     }
 
+    // Adding to the currentCalc array
     if (currentCalc.length > 0) {
       const previousEntry = currentCalc[currentCalc.length - 1];
-      const previousIsNumber = !["+", "-", "/", "*"].includes(previousEntry);
+      const previousIsNumber = !isOperator(previousEntry);
 
-      // It's a number (inc decimal point) and last was a number concatenate with last. update display
+      // If the first array entry is a zero, ignore any more zeros
+      if (currentCalc.length === 1 && previousEntry === "0" && keyValue === "0") {
+        return;
+      }
+      // If the first array entry is zero only keep the zero it if the next entry is a decimal
+      if (currentCalc.length === 1 && previousEntry === "0") {
+        const newNum = keyValue === "." ? "0." : keyValue;
+        setCurrentCalc([newNum]);
+        setDisplayValue(newNum);
+        return;
+      }
+
+      // Keypress is a number (inc decimal point) and last was a number concatenate with last. update display
       if (keyType === "number" && previousIsNumber) {
-        const copyCalc = [...currentCalc];
-        // prevent 2 leading zeros
-        let newNum = keyValue === "0" && previousEntry === "0" ? previousEntry : previousEntry + keyValue;
         // TODO: prevent 2 decimal points
         if (previousEntry.includes(".") && keyValue === ".") {
-          newNum = previousEntry;
+          return;
         }
+        const copyCalc = [...currentCalc];
+        let newNum = previousEntry + keyValue;
 
-        copyCalc.splice(-1, 1, newNum);
+        copyCalc.pop();
+        copyCalc.push(newNum);
         setCurrentCalc(copyCalc);
         setDisplayValue(newNum);
         return;
       }
-      // It's a number and last was an operation then add as a new entry in array. Update display
+
+      // Keypress is a number and last was an operation then add as a new entry in array. Update display
       if (keyType === "number" && previousIsNumber === false) {
         setCurrentCalc([...currentCalc, keyValue]);
         setDisplayValue(keyValue);
         return;
       }
 
-      // It's an operation and last was a number then add as a new entry in array. Don't update display.
+      // Keypress is an operation and last was a number then add as a new entry in array. Don't update display.
       if (keyType === "operation" && previousIsNumber) {
         setCurrentCalc([...currentCalc, keyValue]);
         return;
       }
-      // if it's a operator and last one was also an operator the overwrite it instead. Don't update display.
+
+      // Keypress is a minus and last one was an operation then add as a new entry in array. Don't update display.
+      if (previousIsNumber === false && keyValue === "-") {
+        const copyCalc = [...currentCalc];
+        copyCalc.push(keyValue);
+        setCurrentCalc(copyCalc);
+        return;
+      }
+      // Keypress is an operator and last one was an operator then overwrite the last one (or two). Don't update display.
       if (keyType === "operation" && previousIsNumber === false) {
         const copyCalc = [...currentCalc];
-        keyValue === "-" ? copyCalc.push(keyValue) : copyCalc.splice(-1, 1, keyValue);
+        copyCalc.pop();
+        const checkNextIsNumber = !isOperator(copyCalc[copyCalc.length - 1]);
+
+        if (checkNextIsNumber) {
+          copyCalc.push(keyValue);
+        } else {
+          copyCalc.pop();
+          copyCalc.push(keyValue);
+        }
+
         setCurrentCalc(copyCalc);
         return;
       }
@@ -75,12 +111,10 @@ function App() {
 
   function calculateAnswer() {
     let answer = eval(currentCalc.join(""));
+    const roundedAnswer = Math.round(answer * 1e10) / 1e10;
 
-    if (Math.floor(answer) !== answer) {
-      answer = answer.toFixed(8);
-    }
-    setDisplayValue(answer + "");
-    setCurrentCalc([answer + ""]);
+    setDisplayValue(roundedAnswer + "");
+    setCurrentCalc([roundedAnswer + ""]);
   }
 
   return (
@@ -108,7 +142,13 @@ function App() {
           function processClick() {
             addToCalc(numKey.value, "number");
           }
-
+          if (numKey.id === "decimal") {
+            return (
+              <div id={numKey.id} className="key" onClick={processClick} key={numKey.id}>
+                <div id="dot">.</div>
+              </div>
+            );
+          }
           return (
             <div id={numKey.id} className="key" onClick={processClick} key={numKey.id}>
               <FontAwesomeIcon icon={numKey.icon} />
@@ -123,6 +163,7 @@ function App() {
         </div>
         <div id="equals" className="key" onClick={calculateAnswer}>
           <FontAwesomeIcon icon={equalsKey.icon} />
+          <span className="hidden">=</span>
         </div>
       </div>
     </div>
