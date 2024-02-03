@@ -22,7 +22,7 @@ function App() {
     return ["+", "-", "/", "*"].includes(value);
   }
 
-   function addToCalc(keyValue: string, keyType: KeyType) {
+  function addToCalc(keyValue: string, keyType: KeyType) {
     console.log("key clicked", keyValue, keyType);
 
     // If empty currentCalc array - add the keypress if it's a number or a minus, otherwise ignore
