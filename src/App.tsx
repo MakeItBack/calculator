@@ -54,7 +54,7 @@ function App() {
 
       // Keypress is a number (inc decimal point) and last was a number concatenate with last. update display
       if (keyType === "number" && previousIsNumber) {
-        // TODO: prevent 2 decimal points
+        // Prevent 2 decimal points
         if (previousEntry.includes(".") && keyValue === ".") {
           return;
         }
