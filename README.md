@@ -1,17 +1,3 @@
-## TODO
-
-- downgrade react ✅
-- add favicon ✅
-- set up calculator grid ✅
-- make responsive ✅
-- get all tests passing ✅
-- host ✅
-- upload link to FCC ✅
-- get screenshot
-- update readme for GitHub
-- Check GitHub project info
-
-
 # Calculator
 
 <details>
@@ -54,20 +40,20 @@ This project is built with **React** using [Vite](https://vitejs.dev/) and writt
 
 ## Instructions
 
-- Just bang away!
-- You can sound a drum by clicking it or tapping the suitable letter key on your keyboard
+- Operated by mouse clicks
   
 ## Updates
 
 ### Ideas:
-- Add additional functionality and controls - e.g. volume or different collections of sounds
-- Add nicer styling
+- Add keypress activation (currently it's just mouse clicks)
+- Add sounds and or animation for the button clicks
+- Add additional calculator functionality and controls - e.g. square root, squared
 
 ## Live Site
 
-This project is [deployed on Netlify](https://a-wee-drum.netlify.app/)
+This project is [deployed on Netlify](https://mikalculator.netlify.app/)
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/f8a4505a-ccbc-4d3f-8968-8be89bbc7365/deploy-status)](https://app.netlify.com/sites/a-wee-drum/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/da361b80-6f45-4973-aa4c-f524a702f6cd/deploy-status)](https://app.netlify.com/sites/mikalculator/deploys)
 
 ## Status
 
