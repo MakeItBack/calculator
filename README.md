@@ -58,11 +58,11 @@ This project is [deployed on Netlify](https://mikalculator.netlify.app/)
 ## Status
 
 <a href="https://GitHub.com/MakeItBack/Markdown-Previewer/graphs/commit-activity"><img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg"></a>
-<a href="https://GitHub.com/MakeItBack/Markdown-Previewer/commit"><img src="https://img.shields.io/github/last-commit/MakeItBack/drum-machine"></a>
+<a href="https://GitHub.com/MakeItBack/Markdown-Previewer/commit"><img src="https://img.shields.io/github/last-commit/MakeItBack/calculator"></a>
 
 ## License
 
 This project is licensed under the terms of the BSD 3-clause "New" or "Revised" license.
 
-<a href="https://opensource.org/licenses"><img src="https://img.shields.io/github/license/MakeItBack/Drum-machine?color=dodgerblue"></a><br>
+<a href="https://opensource.org/licenses"><img src="https://img.shields.io/github/license/MakeItBack/calculator?color=dodgerblue"></a><br>
 
